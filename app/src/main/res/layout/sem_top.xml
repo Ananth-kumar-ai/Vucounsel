@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:elevation="15dp"
+    app:cardCornerRadius="10dp"
+    android:layout_margin="10dp"
+    android:id="@+id/sem_card">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/acadperf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="6.50dp"
+            android:text="Academic Performance"
+            android:textSize="18.20dp"
+            android:textStyle="bold"/>
+
+        <View
+            android:id="@+id/v"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="6.50dp"
+            android:background="@color/black"
+            app:layout_constraintEnd_toEndOf="@+id/acadperf"
+            app:layout_constraintStart_toStartOf="@id/acadperf"
+            app:layout_constraintTop_toBottomOf="@+id/acadperf" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="80sp"
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Passed Subjects"
+                    android:gravity="center"
+                    android:textSize="10dp"
+                    />
+                <TextView
+                    android:id="@+id/ps"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="O"
+                    android:textSize="30sp"
+                    android:gravity="center"
+                    android:textAlignment="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="80sp"
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Backlog Subjects"
+                    android:gravity="center"
+                    android:textSize="10dp"
+                    />
+                <TextView
+                    android:id="@+id/bs"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="O"
+                    android:textSize="30sp"
+                    android:gravity="center"
+                    android:textAlignment="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="80sp"
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Credits"
+                    android:gravity="center"
+                    android:textSize="10dp"
+                    />
+                <TextView
+                    android:id="@+id/cr"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="O"
+                    android:textSize="30sp"
+                    android:gravity="center"
+                    android:textAlignment="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="80sp"
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="SGPA"
+                    android:gravity="center"
+                    android:textSize="10dp"
+                    />
+                <TextView
+                    android:id="@+id/sgpa"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="O"
+                    android:textSize="30sp"
+                    android:gravity="center"
+                    android:textAlignment="center"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

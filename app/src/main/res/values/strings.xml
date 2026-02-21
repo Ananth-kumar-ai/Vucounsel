@@ -1,0 +1,104 @@
+<resources>
+    <string name="app_name">VCounsel</string>
+    <string-array name="weekList">
+        <item>Select Week</item>
+        <item>Week 1</item>
+        <item>Week 2</item>
+        <item>Week 3</item>
+        <item>Week 4</item>
+        <item>Week 5</item>
+    </string-array>
+
+<!--    Attitude-->
+
+    <string-array name="attitudeQuestion1">
+        <item>Please Select</item>
+        <item>Grasps the subject concepts during class</item>
+        <item>A keen listener with undivided attention but unable to grasp the concepts</item>
+        <item>Questions teacher when in doubt</item>
+        <item>Consults fellow students to clear doubts</item>
+        <item>Takes no action when in doubt</item>
+        <item>None</item>
+    </string-array>
+    <string-array name="attitudeQuestion2">
+        <item>Please Select</item>
+        <item>Enjoys sharing with all students who ask for it</item>
+        <item>During college hours</item>
+        <item>outside college hours</item>
+        <item>With students of their choice</item>
+        <item>With students suggested by teacher</item>
+        <item>None</item>
+    </string-array>
+    <string-array name="attitudeQuestion3">
+        <item>Please Select</item>
+        <item>Enjoys sharing with all students who ask for it</item>
+        <item>To exhibit his knowledge in class to get Appreciation</item>
+        <item>To Embarrass the Teacher with difficult questions</item>
+        <item>None</item>
+    </string-array>
+    <string-array name="attitudeQuestion4">
+        <item>Please Select</item>
+        <item>Mathematical equations</item>
+        <item>By Lab demonstrations/animations</item>
+        <item>Linguistic</item>
+        <item>By memory</item>
+        <item>Kinesthetic</item>
+        <item>None</item>
+    </string-array>
+    <string-array name="attitudeQuestion5">
+        <item>Please Select</item>
+        <item>Very clear about his/her goals</item>
+        <item>has an action plan for realizing goals</item>
+        <item>Unclear about action plan</item>
+        <item>No fixed goals but amenable to suggestions</item>
+        <item>Never addresses this issue</item>
+        <item>None</item>
+    </string-array>
+    <string-array name="attitudeQuestion6">
+        <item>Please Select</item>
+        <item>Ambitions on project work in first and second year itself</item>
+        <item>Participation in seminars/symposia/workshops</item>
+        <item>Paper writing/ Publications</item>
+        <item>Sports/fine arts</item>
+        <item>Indifferent to acquiring additional skills</item>
+        <item>Preparing for GATE/ GRE/TOEFL</item>
+        <item>Additional certificate courses by working outside college hours</item>
+        <item>None</item>
+    </string-array>
+    <string-array name="attitudeQuestion7">
+        <item>Please Select</item>
+        <item>Transparent</item>
+        <item>Introvert</item>
+        <item>Extrovert</item>
+        <item>He is not what he appears to be</item>
+        <item>Indifferent and detached</item>
+        <item>None</item>
+    </string-array>
+    <string-array name="attitudeQuestion8">
+        <item>Please Select</item>
+        <item>Psychologically strong and doesn’t easily get disturbed even under disturbing conditions</item>
+        <item>Supports emotionally weak students</item>
+        <item>Balanced emotionally, can improve with peer help</item>
+        <item>Emotionally weak and gets disturbed by simple perturbations</item>
+        <item>None</item>
+    </string-array>
+    <string-array name="attitudeQuestion9">
+        <item>Please Select</item>
+        <item>Utilizes every minute at and outside the college</item>
+        <item>Known to be studious at home</item>
+        <item>Does not study much, but believes in reflective thinking</item>
+        <item>Known to be a student whose seldom studies</item>
+        <item>None</item>
+    </string-array>
+
+<!--    Traits-->
+
+    <string-array name="traitsQuestion">
+        <item>No Problem</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+</resources>
