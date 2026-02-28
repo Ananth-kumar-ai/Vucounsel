@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="q2_improvement_options">
+        <item>Select Action</item>
+        <item>Extra Classes</item>
+        <item>Personal Counselling</item>
+        <item>Parent Meeting</item>
+        <item>Study Material Provided</item>
+        <item>Peer Mentoring</item>
+        <item>Online Resources Shared</item>
+    </string-array>
+
+    <string-array name="q3_changes_options">
+        <item>Select Reason</item>
+        <item>Personal Issues</item>
+        <item>Health Issues</item>
+        <item>Family Problems</item>
+        <item>Academic Pressure</item>
+        <item>Financial Problems</item>
+        <item>Peer Influence</item>
+    </string-array>
+
+</resources>

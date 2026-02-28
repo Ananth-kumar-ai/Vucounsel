@@ -51,7 +51,6 @@ public class Attitude extends Fragment {
             cyear = getArguments().getString("cyear");
             sem = getArguments().getString("semester");
             currentWeekName = getArguments().getString("current_week", "");
-//            Log.d("CounsellingTAB", "onCreateView: " + regno + " " + cyear + " " + sem+ " " + usercode+ " " + currentWeekName);
         }
 
         moduleType = root.findViewById(R.id.toggleButtonQuestion1);
@@ -80,7 +79,8 @@ public class Attitude extends Fragment {
             String registerno = regno;
             String finalDatetime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
 
-            String url = "http://160.187.169.14/jspapi/cattitudereport.jsp";
+            // Updated URL to the new XAMPP Localhost IP
+            String url = "http://192.168.10.25/jspapi/test/cattitudereport.jsp";
 
             StringRequest request = new StringRequest(Request.Method.POST, url,
                     response -> Toast.makeText(getContext(), "Submitted Successfully", Toast.LENGTH_SHORT).show(),
@@ -102,6 +102,7 @@ public class Attitude extends Fragment {
                     param.put("finalMid", finalMidno);
                     param.put("registerno", registerno);
                     param.put("datetime", finalDatetime);
+                    param.put("weekname", currentWeekName); // Important: Informs backend to mark attendance as "Present"
                     return param;
                 }
             };
