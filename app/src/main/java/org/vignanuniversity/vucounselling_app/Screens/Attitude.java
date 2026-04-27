@@ -80,7 +80,7 @@ public class Attitude extends Fragment {
             String finalDatetime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
 
             // Updated URL to the new XAMPP Localhost IP
-            String url = "http://192.168.10.25/jspapi/test/cattitudereport.jsp";
+            String url = "http://160.187.169.24/counselling_jspapi/cattitudereport.jsp";
 
             StringRequest request = new StringRequest(Request.Method.POST, url,
                     response -> Toast.makeText(getContext(), "Submitted Successfully", Toast.LENGTH_SHORT).show(),

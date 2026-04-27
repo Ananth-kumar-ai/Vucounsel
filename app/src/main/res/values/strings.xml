@@ -9,7 +9,7 @@
         <item>Week 5</item>
     </string-array>
 
-<!--    Attitude-->
+    <!--    Attitude-->
 
     <string-array name="attitudeQuestion1">
         <item>Please Select</item>
@@ -91,7 +91,7 @@
         <item>None</item>
     </string-array>
 
-<!--    Traits-->
+    <!--    Traits-->
 
     <string-array name="traitsQuestion">
         <item>No Problem</item>

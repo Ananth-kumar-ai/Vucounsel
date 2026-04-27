@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace = "org.vignanuniversity.vucounselling_app"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "org.vignanuniversity.vucounselling_app"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 3
         versionName = "2"
 
@@ -41,6 +41,7 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
+    implementation(libs.activity)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

@@ -148,7 +148,7 @@ public class Counselling extends Fragment {
             return;
         }
 
-        String url = "http://192.168.10.25/jspapi/test/givecounselling.jsp";
+        String url = "http://160.187.169.24/counselling_jspapi/givecounselling.jsp";
 
         StringRequest request = new StringRequest(Request.Method.POST, url,
                 response -> {

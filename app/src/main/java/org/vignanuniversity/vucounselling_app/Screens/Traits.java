@@ -29,7 +29,7 @@ import java.util.Map;
 public class Traits extends Fragment {
 
     private View root;
-    private final String url = "http://192.168.10.25/jspapi/test/ctraitsreport.jsp";
+    private final String url = "http://160.187.169.24/counselling_jspapi/ctraitsreport.jsp";
     private String studentRegno = "";
     private String currentWeek  = "";
     private String empcode      = "";

@@ -1,6 +1,7 @@
 package org.vignanuniversity.vucounselling_app.StudentTabScreens;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,20 +21,22 @@ import com.android.volley.toolbox.Volley;
 import org.vignanuniversity.vucounselling_app.Adapter.CourseAdapter;
 import org.vignanuniversity.vucounselling_app.Adapter.OnScrollListener;
 import org.vignanuniversity.vucounselling_app.DataFetcher.All_DataFetcher;
+import org.vignanuniversity.vucounselling_app.MainScreens.AttendanceMain;
 import org.vignanuniversity.vucounselling_app.R;
+import org.vignanuniversity.vucounselling_app.Screens.StudentReport;
 import org.vignanuniversity.vucounselling_app.classFiles.Course;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class AttendanceFragment extends Fragment {
+
+    private static final String TAG = "ATT_FRAGMENT";
 
     View root;
     private RecyclerView recyclerView;
@@ -40,53 +44,98 @@ public class AttendanceFragment extends Fragment {
     private ArrayList<Course> arrayList;
     SharedPreferences preferences;
     RequestQueue requestQueue;
-    String regno = "";
+
+    String regno   = "";
+    String empcode = "";
+
     TextView total, present, absent, percentage;
     private OnScrollListener scrollListener;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_attendance, container, false);
 
         preferences = root.getContext().getSharedPreferences("pref", Context.MODE_PRIVATE);
-        regno = getArguments().getString("student_regno", "");
 
+        // 1. Read from bundle
+        Bundle args = getArguments();
+        if (args != null) {
+            regno   = args.getString("student_regno", "");
+            empcode = args.getString("empcode", "");
+        }
+
+        // 2. Fall back to AttendanceMain static field
+        if (empcode == null || empcode.isEmpty()) {
+            empcode = AttendanceMain.empcode;
+            Log.d(TAG, "empcode from AttendanceMain static: [" + empcode + "]");
+        }
+
+        // 3. Fall back to SharedPreferences
+        if (empcode == null || empcode.isEmpty()) {
+            empcode = preferences.getString("empcode", "");
+            Log.d(TAG, "empcode from SharedPrefs: [" + empcode + "]");
+        }
+
+        Log.d(TAG, "onCreateView: regno=[" + regno + "] empcode=[" + empcode + "]");
 
         initializeViews();
         setupRecyclerViewScrollListener();
+        setupStudentReportCard();
+
         requestQueue = Volley.newRequestQueue(getContext());
-
-        // Fetch Attendance Data
-        All_DataFetcher.attendanceDataFetcher(getContext(), regno, false, this::parseAttendanceData);
-        All_DataFetcher.attendanceDataFetcher(getContext(), regno, false, this::parseCourseData);
-
+        All_DataFetcher.attendanceDataFetcher(getContext(), regno, false,
+                this::parseAttendanceData);
+        All_DataFetcher.attendanceDataFetcher(getContext(), regno, false,
+                this::parseCourseData);
 
         return root;
     }
 
-    // setup a scroll listener to the recycler view
+    private void setupStudentReportCard() {
+        CardView studentReportCard = root.findViewById(R.id.student_report_card);
+        studentReportCard.setOnClickListener(v -> {
+
+            // Re-resolve empcode at click time — by now personalDetails API has finished
+            String resolvedEmpcode = empcode;
+
+            if (resolvedEmpcode == null || resolvedEmpcode.isEmpty()) {
+                resolvedEmpcode = AttendanceMain.empcode;
+            }
+            if (resolvedEmpcode == null || resolvedEmpcode.isEmpty()) {
+                resolvedEmpcode = preferences.getString("empcode", "");
+            }
+
+            Log.d(TAG, "Opening StudentReport: regno=[" + regno
+                    + "] empcode=[" + resolvedEmpcode + "]");
+
+            Intent intent = new Intent(getActivity(), StudentReport.class);
+            intent.putExtra("student_regno", regno);
+            intent.putExtra("empcode", resolvedEmpcode);
+            startActivity(intent);
+        });
+    }
+
     private void setupRecyclerViewScrollListener() {
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 if (scrollListener != null) {
-                    if (dy > 0) {
-                        scrollListener.onScrollDown();
-                    } else if (dy < 0) {
-                        scrollListener.onScrollUp();
-                    }
+                    if (dy > 0) scrollListener.onScrollDown();
+                    else if (dy < 0) scrollListener.onScrollUp();
                 }
             }
         });
     }
+
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof OnScrollListener) {
             scrollListener = (OnScrollListener) context;
         } else {
-            throw new RuntimeException(context.toString() + " must implement OnScrollListener");
+            throw new RuntimeException(context + " must implement OnScrollListener");
         }
     }
 
@@ -97,11 +146,10 @@ public class AttendanceFragment extends Fragment {
     }
 
     private void initializeViews() {
-        total = root.findViewById(R.id.total);
-        present = root.findViewById(R.id.present);
-        absent = root.findViewById(R.id.absent);
-        percentage = root.findViewById(R.id.percentage);
-
+        total        = root.findViewById(R.id.total);
+        present      = root.findViewById(R.id.present);
+        absent       = root.findViewById(R.id.absent);
+        percentage   = root.findViewById(R.id.percentage);
         recyclerView = root.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         arrayList = new ArrayList<>();
@@ -113,81 +161,51 @@ public class AttendanceFragment extends Fragment {
             present.setText(response.getString("TotalAttendedHours"));
             absent.setText(response.getString("TotalAbsentHours"));
             percentage.setText(response.optString("TotalAttendedPercentage", "0.00"));
-
         } catch (JSONException e) {
-            Log.e("AttendanceParsing", "Error parsing attendance data: " + e.getMessage());
+            Log.e(TAG, "parseAttendanceData error: " + e.getMessage());
         }
     }
 
     private void parseCourseData(JSONObject response) {
-
         try {
             arrayList.clear();
-
             JSONArray subjectsArray = response.getJSONArray("Subjects");
-
             Map<String, Course> theoryMap = new HashMap<>();
-            Map<String, Course> labMap = new HashMap<>();
+            Map<String, Course> labMap    = new HashMap<>();
 
             for (int i = 0; i < subjectsArray.length(); i++) {
-
                 JSONObject obj = subjectsArray.getJSONObject(i);
-
-                String codeKey = "subjectcode" + i;
-                String nameKey = "subjectname" + i;
-                String totalKey = "total" + i;
+                String codeKey   = "subjectcode" + i;
+                String nameKey   = "subjectname" + i;
+                String totalKey  = "total" + i;
                 String absentKey = "absent" + i;
-
-                if (!obj.has(codeKey) || !obj.has(totalKey) || !obj.has(absentKey)) {
-                    continue;
-                }
+                if (!obj.has(codeKey) || !obj.has(totalKey)
+                        || !obj.has(absentKey)) continue;
 
                 String code = obj.getString(codeKey);
                 String name = obj.optString(nameKey, "");
-                int total = obj.getInt(totalKey);
-                int absent = obj.getInt(absentKey);
-                int present = total - absent;
+                int    tot  = obj.getInt(totalKey);
+                int    abs  = obj.getInt(absentKey);
+                int    pres = tot - abs;
+                float  pct  = tot > 0 ? (pres * 100f) / tot : 0f;
 
-                float percentage = total > 0 ? (present * 100f) / total : 0f;
-
-                Course course = new Course(
-                        code,
-                        name,
-                        "",
-                        total,
-                        present,
-                        percentage
-                );
-
-                if (code.endsWith("A")) {
-                    labMap.put(code.replace("A", ""), course);
-                } else {
-                    theoryMap.put(code, course);
-                }
+                Course course = new Course(code, name, "", tot, pres, pct);
+                if (code.endsWith("A")) labMap.put(code.replace("A", ""), course);
+                else theoryMap.put(code, course);
             }
 
             for (String code : theoryMap.keySet()) {
-
                 Course theory = theoryMap.get(code);
-
                 if (labMap.containsKey(code)) {
-
-                    Course lab = labMap.get(code);
-
-                    int finalTotal = theory.getTotalClasses() + lab.getTotalClasses();
-                    int finalPresent = theory.getAttendedClasses() + lab.getAttendedClasses();
-                    float finalPercentage = finalTotal > 0
-                            ? (finalPresent * 100f) / finalTotal
-                            : 0f;
-
-                    arrayList.add(new Course(
-                            code,
-                            theory.getName(),
-                            "",
-                            finalTotal,
-                            finalPresent,
-                            finalPercentage
-                    ));
+                    Course lab          = labMap.get(code);
+                    int    finalTotal   = theory.getTotalClasses()
+                            + lab.getTotalClasses();
+                    int    finalPresent = theory.getAttendedClasses()
+                            + lab.getAttendedClasses();
+                    float  finalPct     = finalTotal > 0
+                            ? (finalPresent * 100f) / finalTotal : 0f;
+                    arrayList.add(new Course(code, theory.getName(), "",
+                            finalTotal, finalPresent, finalPct));
                 } else {
                     arrayList.add(theory);
                 }
@@ -197,8 +215,7 @@ public class AttendanceFragment extends Fragment {
             recyclerView.setAdapter(adapter);
 
         } catch (JSONException e) {
-            Log.e("ATT_PARSE_ERROR", e.toString());
+            Log.e(TAG, "parseCourseData error: " + e.toString());
         }
     }
-
 }

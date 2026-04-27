@@ -16,6 +16,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Attendance Summary Card -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -65,8 +67,7 @@
                             android:layout_height="wrap_content"
                             android:text="Total Periods"
                             android:gravity="center"
-                            android:textSize="10dp"
-                            />
+                            android:textSize="10dp"/>
                         <TextView
                             android:id="@+id/total"
                             android:layout_width="match_parent"
@@ -87,8 +88,7 @@
                             android:layout_height="wrap_content"
                             android:text="Absent Periods"
                             android:gravity="center"
-                            android:textSize="10dp"
-                            />
+                            android:textSize="10dp"/>
                         <TextView
                             android:id="@+id/absent"
                             android:layout_width="match_parent"
@@ -109,8 +109,7 @@
                             android:layout_height="wrap_content"
                             android:text="Present"
                             android:gravity="center"
-                            android:textSize="10dp"
-                            />
+                            android:textSize="10dp"/>
                         <TextView
                             android:id="@+id/present"
                             android:layout_width="match_parent"
@@ -131,8 +130,7 @@
                             android:layout_height="wrap_content"
                             android:text="Percentage"
                             android:gravity="center"
-                            android:textSize="10dp"
-                            />
+                            android:textSize="10dp"/>
                         <TextView
                             android:id="@+id/percentage"
                             android:layout_width="match_parent"
@@ -144,6 +142,79 @@
                     </LinearLayout>
 
                 </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Student Report Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/student_report_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:elevation="15dp"
+            app:cardCornerRadius="12dp"
+            android:backgroundTint="#1A237E"
+            android:foreground="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:gravity="center_vertical">
+
+                <!-- Icon background circle -->
+                <FrameLayout
+                    android:layout_width="48dp"
+                    android:layout_height="48dp">
+                    <View
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/circle_white_alpha"
+                        android:alpha="0.15"/>
+                    <ImageView
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_report"
+                        android:tint="#FFFFFF"/>
+                </FrameLayout>
+
+                <!-- Text section -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="14dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Student Report"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16dp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="View detailed academic performance"
+                        android:textColor="#B0BEC5"
+                        android:textSize="12dp"
+                        android:layout_marginTop="2dp"/>
+                </LinearLayout>
+
+                <!-- Arrow icon -->
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_arrow_forward"
+                    android:tint="#FFFFFF"
+                    android:alpha="0.8"/>
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

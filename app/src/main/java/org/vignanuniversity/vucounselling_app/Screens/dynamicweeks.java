@@ -232,7 +232,7 @@ public class dynamicweeks extends Fragment {
     // Hits our new check_attendance.jsp API to recall state silently
     private void checkAttendanceStatusOnLoad(String studentRegNo, String empcode, String weekname,
                                              MaterialButtonToggleGroup toggleGroup, MaterialButton p, MaterialButton a, MaterialButton n) {
-        String url = "http://192.168.10.25/jspapi/test/check_attendance.jsp";
+        String url = "http://160.187.169.24/counselling_jspapi/check_attendance.jsp";
 
         RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
         StringRequest request = new StringRequest(Request.Method.POST, url,
@@ -276,7 +276,7 @@ public class dynamicweeks extends Fragment {
     }
 
     private void markAttendanceStatus(String studentRegNo, String empcode, String weekname, String status) {
-        String url = "http://192.168.10.25/jspapi/test/mark_attendance.jsp";
+        String url = "http://160.187.169.24/counselling_jspapi/mark_attendance.jsp";
 
         RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
         StringRequest request = new StringRequest(Request.Method.POST, url,
